@@ -34,9 +34,8 @@ export class ShowRepository {
             });
         }
 
-        // Prisma createMany is efficient
-        return prisma.seat.createMany({
-            data: seatsData
-        });
+        // SQLite compatibility: Use Promise.all instead of createMany
+        await Promise.all(seatsData.map(seat => prisma.seat.create({ data: seat })));
+        return { count: seatsData.length };
     }
 }

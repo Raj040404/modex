@@ -47,7 +47,8 @@ async function main() {
             }
         }
 
-        await prisma.seat.createMany({ data: seatsData });
+        // SQLite compatibility: Use Promise.all
+        await Promise.all(seatsData.map(seat => prisma.seat.create({ data: seat })));
     }
 
     console.log("Seeding complete!");
