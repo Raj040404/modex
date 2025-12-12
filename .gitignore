@@ -6,7 +6,7 @@ build
 *.log
 .DS_Store
 coverage
-backend/dev.db
+# backend/dev.db (Uncommented for Demo)
 backend/node_modules
 frontend/node_modules
 backend/dist
