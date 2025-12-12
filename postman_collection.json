@@ -1,0 +1,113 @@
+{
+    "info": {
+        "_postman_id": "b3e04e10-1823-4416-9af4-650059345c22",
+        "name": "Booking System API",
+        "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+    },
+    "item": [
+        {
+            "name": "Admin: Create Show",
+            "request": {
+                "method": "POST",
+                "header": [
+                    {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                    }
+                ],
+                "body": {
+                    "mode": "raw",
+                    "raw": "{\n    \"name\": \"Avengers: Secret Wars\",\n    \"startTime\": \"2025-05-01T20:00:00Z\",\n    \"totalSeats\": 100\n}"
+                },
+                "url": {
+                    "raw": "{{baseUrl}}/admin/shows",
+                    "host": [
+                        "{{baseUrl}}"
+                    ],
+                    "path": [
+                        "admin",
+                        "shows"
+                    ]
+                }
+            },
+            "response": []
+        },
+        {
+            "name": "Public: Get Shows",
+            "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                    "raw": "{{baseUrl}}/public/shows",
+                    "host": [
+                        "{{baseUrl}}"
+                    ],
+                    "path": [
+                        "public",
+                        "shows"
+                    ]
+                }
+            },
+            "response": []
+        },
+        {
+            "name": "Public: Get Show Details",
+            "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                    "raw": "{{baseUrl}}/public/shows/:id",
+                    "host": [
+                        "{{baseUrl}}"
+                    ],
+                    "path": [
+                        "public",
+                        "shows",
+                        ":id"
+                    ],
+                    "variable": [
+                        {
+                            "key": "id",
+                            "value": "uuid-here"
+                        }
+                    ]
+                }
+            },
+            "response": []
+        },
+        {
+            "name": "Public: Book Seats",
+            "request": {
+                "method": "POST",
+                "header": [
+                    {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                    }
+                ],
+                "body": {
+                    "mode": "raw",
+                    "raw": "{\n    \"userId\": \"user-123\",\n    \"showId\": \"uuid-here\",\n    \"seatIds\": [\"seat-uuid-1\", \"seat-uuid-2\"]\n}"
+                },
+                "url": {
+                    "raw": "{{baseUrl}}/public/bookings",
+                    "host": [
+                        "{{baseUrl}}"
+                    ],
+                    "path": [
+                        "public",
+                        "bookings"
+                    ]
+                }
+            },
+            "response": []
+        }
+    ],
+    "variable": [
+        {
+            "key": "baseUrl",
+            "value": "http://localhost:3000/api",
+            "type": "string"
+        }
+    ]
+}

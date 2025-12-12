@@ -1,0 +1,59 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model Show {
+  id          String    @id @default(uuid())
+  name        String
+  startTime   DateTime
+  totalSeats  Int
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  seats       Seat[]
+  bookings    Booking[]
+}
+
+// SQLite does not support enums, using String
+model Seat {
+  id          String    @id @default(uuid())
+  showId      String
+  seatNumber  String    // e.g. "A1"
+  status      String    @default("AVAILABLE") // 'AVAILABLE', 'LOCKED', 'BOOKED'
+  version     Int       @default(0) // For optimistic locking
+  bookingId   String?   // If currently booked/pending
+  
+  show        Show      @relation(fields: [showId], references: [id])
+  booking     Booking?  @relation(fields: [bookingId], references: [id])
+
+  @@unique([showId, seatNumber])
+}
+
+model Booking {
+    id        String    @id @default(uuid())
+    userId    String    // Just a string for now, could be User FK
+    showId    String
+    status    String    @default("PENDING") // 'PENDING', 'CONFIRMED', 'FAILED', 'CANCELLED'
+    createdAt DateTime  @default(now())
+    expiresAt DateTime? // For PENDING auto-expire
+
+    show      Show      @relation(fields: [showId], references: [id])
+    seats     Seat[]
+}
+
+// Audit Log for creating shows/bookings
+model AuditLog {
+    id        String   @id @default(uuid())
+    action    String
+    entity    String
+    entityId  String
+    data      String?  // SQLite doesn't support Json well either in older versions, but Prisma polyfills it. String is safer.
+    timestamp DateTime @default(now())
+}
