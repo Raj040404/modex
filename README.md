@@ -25,19 +25,20 @@ git remote add origin https://github.com/raj040404/modex.git
 git push -u origin master
 ```
 
-### 2. Frontend (Vercel) | [Deploy Here](https://vercel.com/new)
-- **Repo**: `raj040404/modex`
-- **Root Directory**: `frontend`
-- **Build Command**: `npm run build`
-- **Output Directory**: `dist`
-- **Env Var**: `VITE_API_URL` = (Your Backend URL)
-
-### 3. Backend (Render) | [Deploy Here](https://render.com)
+### 2. Backend (Render) | [Deploy Here](https://render.com)
 - **Repo**: `raj040404/modex`
 - **Root Directory**: `backend`
-- **Build Command**: `npm install && npm run build`
+- **Build Command**: `npm install && npx prisma generate && npm run build`
 - **Start Command**: `npm start`
 - **Env Var**: `DATABASE_URL` = `file:./dev.db` (For SQLite demo)
+
+### 3. Frontend (Vercel) | [Deploy Here](https://vercel.com/new)
+- **Repo**: `raj040404/modex`
+- **Root Directory**: `frontend`
+- **Framework Preset**: `Vite`
+- **Build Command**: `npm run build`
+- **Output Directory**: `dist`
+- **Env Var**: `VITE_API_URL` = (Your Backend URL from Step 2)
 
 ## Documentation
 - [System Design](docs/system_design.md)

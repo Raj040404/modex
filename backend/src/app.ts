@@ -31,7 +31,7 @@ const swaggerSpec = swaggerJsdoc(swaggerOptions);
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
 // Health Check
-app.get('/health', (req, res) => {
+app.get(['/health', '/healthz'], (req, res) => {
     res.status(200).json({ status: 'UP' });
 });
 
