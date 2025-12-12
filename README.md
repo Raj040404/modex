@@ -15,19 +15,29 @@ A scalable, high-performance Ticketing & Booking System built with Node.js, Post
 - `frontend/`: React Application.
 - `docs/`: System Design, Deployment Guides, and Scripts.
 
-## Getting Started
+## 🚀 Deployment
 
-### Backend
-1. `cd backend`
-2. `npm install`
-3. Setup `.env` (see `.env.example` or just `.env`).
-4. `npx prisma generate`
-5. `npm run dev` (Starts on localhost:3000)
+### 1. GitHub Setup (One-time)
+1. **Create Repo**: Go to [GitHub New Repo](https://github.com/new) and name it `modex`.
+2. **Push Code**:
+```bash
+git remote add origin https://github.com/raj040404/modex.git
+git push -u origin master
+```
 
-### Frontend
-1. `cd frontend`
-2. `npm install`
-3. `npm run dev` (Starts on localhost:5173)
+### 2. Frontend (Vercel) | [Deploy Here](https://vercel.com/new)
+- **Repo**: `raj040404/modex`
+- **Root Directory**: `frontend`
+- **Build Command**: `npm run build`
+- **Output Directory**: `dist`
+- **Env Var**: `VITE_API_URL` = (Your Backend URL)
+
+### 3. Backend (Render) | [Deploy Here](https://render.com)
+- **Repo**: `raj040404/modex`
+- **Root Directory**: `backend`
+- **Build Command**: `npm install && npm run build`
+- **Start Command**: `npm start`
+- **Env Var**: `DATABASE_URL` = `file:./dev.db` (For SQLite demo)
 
 ## Documentation
 - [System Design](docs/system_design.md)

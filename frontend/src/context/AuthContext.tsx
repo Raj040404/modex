@@ -11,7 +11,10 @@ interface AuthContextType {
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
-    const [userId, setUserId] = useState('user-' + Math.random().toString(36).substr(2, 9));
+    const [userId] = useState(() => {
+        const saved = localStorage.getItem('userId');
+        return saved || `user_${Math.random().toString(36).substr(2, 9)}`;
+    });
     const [isAdmin, setIsAdmin] = useState(false);
 
     const loginAsAdmin = () => setIsAdmin(true);
